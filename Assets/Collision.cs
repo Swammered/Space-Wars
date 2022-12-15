@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Collision : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
-
-    private void Start(){
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
+    
+    public GameObject Explosion;
+    private void  OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Player"){
-            Debug.Log("You Lose");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         if(other.gameObject.tag == "Bullet"){
-            Debug.Log("Kaboom");
-            Destroy(other.gameObject, 0.1f);
+            Destroy(Instantiate(Explosion, this.transform.position, Quaternion.identity), .5f);
+            Destroy(other.gameObject);
         }
     }
 }

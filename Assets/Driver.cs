@@ -7,7 +7,6 @@ public class Driver : MonoBehaviour
     [SerializeField] float moveAmount = 5f;
     [SerializeField] private GameObject Bullet;
     [SerializeField] private Transform attack_Point;
-
     void Update()
     {
         float moveSpeed = Input.GetAxis("Horizontal") * moveAmount * Time.deltaTime;
@@ -24,7 +23,8 @@ public class Driver : MonoBehaviour
     }
     void Attack(){
         if(Input.GetKeyDown(KeyCode.Space)){
-            Instantiate(Bullet, attack_Point.position,Quaternion.identity);
+            var newBullet = Instantiate(Bullet,transform.position, Quaternion.identity);
+            newBullet.SetActive(true);
         }
     }
 }
